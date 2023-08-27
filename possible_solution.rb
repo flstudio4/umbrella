@@ -1,4 +1,4 @@
-require "http"
+require "net/http"
 require "json"
 
 line_width = 40
@@ -21,7 +21,7 @@ gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{user_lo
 # p "Getting coordinates from:"
 # p gmaps_url
 
-raw_gmaps_data = HTTP.get(gmaps_url)
+raw_gmaps_data = Net::HTTP.get(gmaps_url)
 
 parsed_gmaps_data = JSON.parse(raw_gmaps_data)
 
@@ -43,7 +43,7 @@ puts "Your coordinates are #{latitude}, #{longitude}."
 
 pirate_weather_key = ENV.fetch("PIRATE_WEATHER_KEY")
 
-pirate_weather_url = "https://api.pirateweather.net/forecast/#{pirate_weather_key}/#{latitude},#{longitude}"
+pirate_weather_url = URI("https://api.pirateweather.net/forecast/#{pirate_weather_key}/#{latitude},#{longitude}")
 
 # p "Getting weather from:"
 # p pirate_weather_url
