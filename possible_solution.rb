@@ -16,7 +16,7 @@ puts "Checking the weather at #{user_location}...."
 
 gmaps_key = ENV.fetch("GMAPS_KEY")
 
-gmaps_url = "https://maps.googleapis.com/maps/api/geocode/json?address=#{user_location}&key=#{gmaps_key}"
+gmaps_url = URI("https://maps.googleapis.com/maps/api/geocode/json?address=#{user_location}&key=#{gmaps_key}")
 
 # p "Getting coordinates from:"
 # p gmaps_url
@@ -48,7 +48,7 @@ pirate_weather_url = URI("https://api.pirateweather.net/forecast/#{pirate_weathe
 # p "Getting weather from:"
 # p pirate_weather_url
 
-raw_pirate_weather_data = HTTP.get(pirate_weather_url)
+raw_pirate_weather_data = Net::HTTP.get(pirate_weather_url)
 
 parsed_pirate_weather_data = JSON.parse(raw_pirate_weather_data)
 
